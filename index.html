@@ -245,6 +245,8 @@ body{
     .cover{
         font-size:14px;
     }
+
+    
 }
 </style>
 </head>
@@ -302,7 +304,14 @@ function showGift(){
 }
 
 function openBook(){
-    document.getElementById('book').classList.add('open');
+    const book = document.getElementById('book');
+
+    // ⭐ tambahan: biar animasi lebih halus di HP
+    if(book.classList.contains('open')){
+        book.classList.remove('open');
+    } else {
+        book.classList.add('open');
+    }
 }
 
 function restart(){
