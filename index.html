@@ -27,7 +27,7 @@ body{
     align-items:flex-end;
 }
 
-/* KUE */
+/* CAKE */
 .layer{
     position:absolute;
     left:50%;
@@ -38,29 +38,9 @@ body{
     cursor:pointer;
 }
 
-.big{
-    width:320px;
-    height:90px;
-    background:#d2691e;
-    bottom:0;
-    animation-delay:0s;
-}
-
-.medium{
-    width:240px;
-    height:75px;
-    background:#f4a460;
-    bottom:100px;
-    animation-delay:1s;
-}
-
-.small{
-    width:170px;
-    height:55px;
-    background:#ffe4b5;
-    bottom:190px;
-    animation-delay:2s;
-}
+.big{width:320px;height:90px;background:#d2691e;bottom:0;}
+.medium{width:240px;height:75px;background:#f4a460;bottom:100px;animation-delay:1s;}
+.small{width:170px;height:55px;background:#ffe4b5;bottom:190px;animation-delay:2s;}
 
 .candle{
     width:14px;
@@ -86,23 +66,17 @@ body{
     animation:flicker .3s infinite alternate;
 }
 
+/* ANIMATION */
 @keyframes drop{
-    0%{
-        transform:translate(-50%,-300px);
-        opacity:0;
-    }
-    100%{
-        transform:translate(-50%,0);
-        opacity:1;
-    }
+    0%{transform:translate(-50%,-300px);opacity:0;}
+    100%{transform:translate(-50%,0);opacity:1;}
 }
-
 @keyframes flicker{
     from{transform:translateX(-50%) scale(1);}
     to{transform:translateX(-50%) scale(1.3);}
 }
 
-/* TOMBOL */
+/* BUTTON */
 .btn{
     position:fixed;
     top:15px;
@@ -117,7 +91,7 @@ body{
     z-index:50;
 }
 
-/* BUKU */
+/* BOOK */
 .book-container{
     position:absolute;
     top:20px;
@@ -132,6 +106,8 @@ body{
     height:clamp(320px, 60vh, 500px);
     position:relative;
 }
+
+/* PAGE */
 .page{
     position:absolute;
     width:50%;
@@ -140,19 +116,13 @@ body{
     box-shadow:0 0 15px rgba(0,0,0,.15);
     padding:20px;
     box-sizing:border-box;
-
     opacity:0;
     visibility:hidden;
     transition:.6s;
 }
 
-.left-page{
-    left:0;
-}
-
-.right-page{
-    left:50%;
-}
+.left-page{left:0;}
+.right-page{left:50%;}
 
 .page h2{
     text-align:center;
@@ -169,9 +139,10 @@ body{
 .page p{
     text-align:center;
     line-height:1.5;
-    font-size:clamp(12px, 2.5vw, 16px);
+    font-size:clamp(12px,2.5vw,16px);
 }
 
+/* COVER */
 .cover{
     position:absolute;
     left:0;
@@ -190,6 +161,7 @@ body{
     transition:1s;
     z-index:10;
     border-radius:0 15px 15px 0;
+    box-shadow:10px 0 20px rgba(0,0,0,.2);
 }
 
 .book.open .cover{
@@ -201,7 +173,7 @@ body{
     visibility:visible;
 }
 
-/* CONFETTI */
+/* EFFECTS */
 .confetti{
     position:fixed;
     width:8px;
@@ -211,13 +183,9 @@ body{
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(720deg);
-        opacity:0;
-    }
+    to{transform:translateY(110vh) rotate(720deg);opacity:0;}
 }
 
-/* BALON */
 .balloon{
     position:fixed;
     bottom:-100px;
@@ -228,13 +196,11 @@ body{
 }
 
 @keyframes rise{
-    to{
-        transform:translateY(-120vh);
-    }
+    to{transform:translateY(-120vh);}
 }
 
+/* MOBILE FIX */
 @media(max-width:768px){
-
     .book{
         width:95vw;
         height:70vh;
@@ -254,6 +220,7 @@ body{
 }
 </style>
 </head>
+
 <body>
 
 <button class="btn" onclick="restart()">Ulang 🎂</button>
@@ -268,122 +235,74 @@ body{
         <div class="flame" id="flame"></div>
     </div>
 
-    <!-- BUKU -->
+    <!-- BOOK -->
     <div class="book-container" id="bookContainer">
 
         <div class="book" id="book">
 
             <div class="cover" onclick="openBook()">
-                <div>
-                    📖<br><br>
-                    Klik Untuk Membuka
-                </div>
+                📖<br><br>
+                Klik Untuk Membuka
             </div>
 
             <div class="page left-page">
                 <h2>🎂 Happy Birthday</h2>
-
-                <img src="WhatsApp Image 2026-06-01 at 04.39.52.jpeg" alt="Foto">
+                <img src="WhatsApp Image 2026-06-01 at 04.39.52.jpeg">
             </div>
 
             <div class="page right-page">
                 <h2>✨ Untuk Monti ✨</h2>
-
                 <p>
-                    Selamat ulang tahun Monti 🎂
-                    <br><br>
-
-                    Semoga panjang umur,
-                    sehat selalu,
-                    rezekinya lancar,
-                    dan semua impianmu
-                    satu per satu terwujud.
-
-                    <br><br>
-
-                    Tetap jadi pribadi yang baik,
-                    bahagia selalu,
-                    dan semoga semua harapanmu
-                    dikabulkan. ✨
+                    Selamat ulang tahun Monti 🎂<br><br>
+                    Semoga panjang umur, sehat selalu,
+                    rezekinya lancar, dan semua impianmu terwujud ✨
                 </p>
             </div>
 
         </div>
-
     </div>
 
 </div>
 
 <script>
-
 function createConfetti(){
     for(let i=0;i<80;i++){
-
         let c=document.createElement('div');
         c.className='confetti';
-
         c.style.left=Math.random()*100+'vw';
-
-        c.style.background=
-        ['#ff4081','#ffeb3b','#4caf50','#2196f3']
-        [Math.floor(Math.random()*4)];
-
+        c.style.background=['#ff4081','#ffeb3b','#4caf50','#2196f3'][Math.floor(Math.random()*4)];
         document.body.appendChild(c);
-
-        setTimeout(()=>{
-            c.remove();
-        },3000);
+        setTimeout(()=>c.remove(),3000);
     }
 }
 
 function createBalloons(){
-
     for(let i=0;i<15;i++){
-
         let b=document.createElement('div');
-
         b.className='balloon';
-
         b.style.left=Math.random()*100+'vw';
-
-        b.style.background=
-        ['#ff4081','#ff9800','#4caf50','#03a9f4']
-        [Math.floor(Math.random()*4)];
-
+        b.style.background=['#ff4081','#ff9800','#4caf50','#03a9f4'][Math.floor(Math.random()*4)];
         document.body.appendChild(b);
-
-        setTimeout(()=>{
-            b.remove();
-        },6000);
+        setTimeout(()=>b.remove(),6000);
     }
 }
 
 function showGift(){
-
     document.getElementById('flame').style.display='none';
-
     document.getElementById('bookContainer').style.display='block';
-
     createConfetti();
     createBalloons();
 }
 
 function openBook(){
-
-    document.getElementById('book')
-            .classList.add('open');
+    document.getElementById('book').classList.add('open');
 }
 
 function restart(){
-
     document.getElementById('flame').style.display='block';
-
     document.getElementById('bookContainer').style.display='none';
-
-    document.getElementById('book')
-            .classList.remove('open');
+    document.getElementById('book').classList.remove('open');
 }
-
 </script>
 
 </body>
