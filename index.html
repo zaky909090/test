@@ -269,6 +269,19 @@ body{
     .cover{
         font-size:12px;
     }
+
+   .hint{
+    position:fixed;
+    top:70px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,.8);
+    padding:10px 15px;
+    border-radius:10px;
+    font-weight:bold;
+    color:#ff4081;
+    z-index:50;
+}
 }
 
     
@@ -284,6 +297,10 @@ body{
     <div class="layer big" onclick="showGift()"></div>
     <div class="layer medium" onclick="showGift()"></div>
     <div class="layer small" onclick="showGift()"></div>
+
+    <div id="hint" class="hint">
+    🎂 Klik lilin untuk meniup lilin
+</div>
 
     <div class="layer candle" onclick="showGift()">
         <div class="flame" id="flame"></div>
@@ -323,8 +340,19 @@ body{
 
 <script>
 function showGift(){
-    document.getElementById('flame').style.display='none';
-    document.getElementById('bookContainer').style.display='block';
+
+    const flame = document.getElementById('flame');
+
+    flame.style.transition = "0.5s";
+    flame.style.opacity = "0";
+    flame.style.transform = "translateX(-50%) scale(0)";
+
+    document.getElementById('hint').style.display = 'none';
+
+    setTimeout(() => {
+        flame.style.display = 'none';
+        document.getElementById('bookContainer').style.display = 'block';
+    }, 500);
 }
 
 
@@ -334,7 +362,15 @@ function toggleBook(){
 
 function restart(){
 
-    document.getElementById('flame').style.display='block';
+    document.getElementById('hint').style.display = 'block';
+
+    const flame = document.getElementById('flame');
+
+    flame.style.display = 'block';
+    flame.style.opacity = '1';
+    flame.style.transform = 'translateX(-50%) scale(1)';
+    flame.style.transition = '0s';
+
     document.getElementById('bookContainer').style.display='none';
     document.getElementById('book').classList.remove('open');
 
@@ -356,4 +392,4 @@ function restart(){
 </script>
 
 </body>
-</html>>
+</html>
