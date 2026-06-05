@@ -114,7 +114,7 @@ body{
 /* BOOK */
 .book-container{
     position:absolute;
-    top:20px;
+    top:15px;
     left:50%;
     transform:translateX(-50%);
     display:none;
@@ -123,7 +123,7 @@ body{
 
 .book{
     width:min(850px, 95vw);
-    height:min(520px, 70vh);
+    height:380px;
     position:relative;
 }
 
@@ -146,26 +146,54 @@ body{
     justify-content:flex-start;
 }
 
-.left-page{left:0;}
-.right-page{left:50%;}
-
-.page h2{
+/* =======================
+   KIRI (HANYA FOTO + TITLE)
+======================= */
+.left-page{
+    left:0;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    color:#ff4081;
-    font-size:clamp(14px, 3vw, 18px);
+    gap:10px;
 }
 
-.page img{
+.left-page img{
     width:100%;
-    height:55%;
+    height:75%;
     object-fit:cover;
     border-radius:12px;
 }
 
-.page p{
+.left-page h2{
+    color:#ff4081;
+    font-size:18px;
+    margin:0;
+}
+
+/* =======================
+   KANAN (FULL TEKS)
+======================= */
+.right-page{
+    left:50%;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
     text-align:center;
-    line-height:1.4;
-    font-size:clamp(12px, 3vw, 16px);
+    padding:15px;
+}
+
+.right-page h2{
+    color:#ff4081;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.right-page p{
+    font-size:13px;
+    line-height:1.5;
 }
 
 /* COVER */
@@ -180,7 +208,7 @@ body{
     justify-content:center;
     align-items:center;
     text-align:center;
-    font-size:26px;
+    font-size:20px;
     font-weight:bold;
     cursor:pointer;
     transform-origin:left;
@@ -199,46 +227,23 @@ body{
     visibility:visible;
 }
 
-/* EFFECTS */
-.confetti{
-    position:fixed;
-    width:8px;
-    height:12px;
-    top:-20px;
-    animation:fall 3s linear forwards;
-}
-
-@keyframes fall{
-    to{transform:translateY(110vh) rotate(720deg);opacity:0;}
-}
-
-.balloon{
-    position:fixed;
-    bottom:-100px;
-    width:25px;
-    height:35px;
-    border-radius:50%;
-    animation:rise 6s linear forwards;
-}
-
-@keyframes rise{
-    to{transform:translateY(-120vh);}
-}
-
-/* MOBILE FIX */
+/* MOBILE */
 @media(max-width:768px){
 
     .book{
-        width:95vw;
-        height:65vh;
+        height:320px;
     }
 
-    .cover{
+    .left-page img{
+        height:80%;
+    }
+
+    .right-page p{
         font-size:16px;
     }
 
-    .page img{
-        height:50%;
+    .cover{
+        font-size:14px;
     }
 }
 </style>
@@ -258,7 +263,6 @@ body{
         <div class="flame" id="flame"></div>
     </div>
 
-    <!-- BOOK -->
     <div class="book-container" id="bookContainer">
 
         <div class="book" id="book">
@@ -268,17 +272,21 @@ body{
                 Klik Untuk Membuka
             </div>
 
+            <!-- KIRI: FOTO + TITLE -->
             <div class="page left-page">
                 <h2>🎂 Happy Birthday</h2>
                 <img src="WhatsApp Image 2026-06-01 at 04.39.52.jpeg">
             </div>
 
+            <!-- KANAN: FULL TEKS -->
             <div class="page right-page">
                 <h2>✨ Untuk Monti ✨</h2>
                 <p>
-                    Selamat ulang tahun Monti 🎂<br><br>
-                    Semoga panjang umur, sehat selalu,
-                    rezekinya lancar, dan semua impianmu terwujud ✨
+                    Selamat ulang tahun 🎉<br><br>
+                    Semoga panjang umur, sehat selalu,<br>
+                    bahagia terus, rezeki lancar,<br>
+                    dan semua impian kamu tercapai ✨<br><br>
+                    Tetap jadi orang yang baik 💖
                 </p>
             </div>
 
