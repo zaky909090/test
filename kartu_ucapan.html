@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title> Kado Ulang Tahun</title>
+<style>
+    body{
+        margin:0;
+        height:100vh;
+        display:flex;
+        justify-content:center;
+        align-items:flex-end;
+        background:linear-gradient(#87ceeb,#ffffff);
+        overflow:hidden;
+        font-family:Arial;
+        padding:10px;
+        box-sizing:border-box;
+    }
+
+    .stage{
+        position:relative;
+        width:100vw;
+        max-width:520px;
+        height:85vh;
+        display:flex;
+        justify-content:center;
+        align-items:flex-end;
+    }
+
+    .layer{
+        position:absolute;
+        left:50%;
+        transform:translateX(-50%);
+        border-radius:18px;
+        opacity:0;
+        animation:drop 1s forwards;
+        cursor:pointer;
+    }
+
+    .big{width:320px;height:90px;background:#d2691e;bottom:0;animation-delay:0s;}
+    .medium{width:240px;height:75px;background:#f4a460;bottom:100px;animation-delay:1s;}
+    .small{width:170px;height:55px;background:#ffe4b5;bottom:190px;animation-delay:2s;}
+    .candle{width:14px;height:70px;background:red;bottom:270px;position:absolute;left:50%;transform:translateX(-50%);animation-delay:3s;}
+
+    .flame{
+        position:absolute;
+        width:22px;
+        height:22px;
+        background:orange;
+        border-radius:50%;
+        top:-20px;
+        left:50%;
+        transform:translateX(-50%);
+        box-shadow:0 0 14px orange;
+        animation:flicker 0.3s infinite alternate;
+    }
+
+    @keyframes drop{
+        0%{transform:translate(-50%, -300px);opacity:0;}
+        100%{transform:translate(-50%, 0);opacity:1;}
+    }
+
+    @keyframes flicker{
+        from{transform:translateX(-50%) scale(1);}
+        to{transform:translateX(-50%) scale(1.3);}
+    }
+
+    .message{
+        position:absolute;
+        top:20px;
+        left:50%;
+        transform:translateX(-50%) scale(0.85);
+        text-align:center;
+        width:360px;
+        background:white;
+        padding:18px;
+        border-radius:15px;
+        box-shadow:0 5px 15px rgba(0,0,0,0.2);
+        opacity:0;
+        pointer-events:none;
+        transition:all 0.5s ease;
+        z-index:10;
+    }
+
+    .message.show{
+        opacity:1;
+        transform:translateX(-50%) scale(1);
+        pointer-events:auto;
+    }
+
+    .arc-text{width:100%;height:90px;}
+
+    .message img{
+        width:180px;
+        height:180px;
+        border-radius:12px;
+        object-fit:cover;
+        margin:10px auto 0;
+        display:block;
+    }
+
+    .message p{
+        font-size:18px;
+        margin-top:12px;
+        line-height:1.5;
+        color:#333;
+        font-weight:bold;
+        text-align:center;
+        padding:0 10px;
+        background:linear-gradient(90deg,#ff4081,#ff80ab);
+        border-radius:8px;
+        box-shadow:0 4px 8px rgba(255,64,129,0.3);
+    }
+
+    .btn{
+        position:fixed;
+        top:15px;
+        left:50%;
+        transform:translateX(-50%);
+        padding:10px 15px;
+        background:#ff4081;
+        color:white;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
+        z-index:20;
+    }
+
+    /* CONFETTI */
+    .confetti{
+        position:fixed;
+        width:8px;
+        height:12px;
+        top:-10px;
+        opacity:0.9;
+        animation:fall 3s linear forwards;
+        z-index:5;
+    }
+
+    @keyframes fall{
+        to{
+            transform:translateY(110vh) rotate(720deg);
+            opacity:0;
+        }
+    }
+
+    /* BALLOON */
+    .balloon{
+        position:fixed;
+        bottom:-100px;
+        width:25px;
+        height:35px;
+        border-radius:50%;
+        animation:rise 6s linear forwards;
+        z-index:4;
+    }
+
+    @keyframes rise{
+        to{
+            transform:translateY(-120vh);
+        }
+    }
+
+</style>
+</head>
+<body>
+
+<button class="btn" onclick="restart()">Ulang 🎂</button>
+
+<div class="stage">
+    <div class="layer big" onclick="showGift()"></div>
+    <div class="layer medium" onclick="showGift()"></div>
+    <div class="layer small" onclick="showGift()"></div>
+    <div class="layer candle" onclick="showGift()">
+        <div class="flame" id="flame"></div>
+    </div>
+
+    <div class="message" id="message">
+        <svg class="arc-text" viewBox="0 0 300 80">
+            <defs>
+                <path id="curve" d="M10,60 Q150,-20 290,60" />
+            </defs>
+            <text>
+                <textPath href="#curve" startOffset="50%" text-anchor="middle" fill="#ff4081" font-size="30">
+                    🎁 Happy Birthday 🎉
+                </textPath>
+            </text>
+        </svg>
+
+        <img src="WhatsApp Image 2026-06-01 at 04.39.52.jpeg" alt="foto">
+
+        <p>Selamat ulang tahun monti 🎂 Semoga panjang umur, sehat selalu, rezekinya lancar, dan semua impianmu satu per satu terwujud yaaa aminnnn ✨</p>
+    </div>
+</div>
+
+<script>
+function createConfetti(){
+    for(let i=0;i<80;i++){
+        let c=document.createElement('div');
+        c.classList.add('confetti');
+        c.style.left=Math.random()*100+'vw';
+        c.style.background=['#ff4081','#ffeb3b','#4caf50','#2196f3'][Math.floor(Math.random()*4)];
+        c.style.animationDuration=(2+Math.random()*3)+'s';
+        document.body.appendChild(c);
+        setTimeout(()=>c.remove(),5000);
+    }
+}
+
+function createBalloons(){
+    for(let i=0;i<15;i++){
+        let b=document.createElement('div');
+        b.classList.add('balloon');
+        b.style.left=Math.random()*100+'vw';
+        b.style.background=['#ff4081','#ff9800','#4caf50','#03a9f4'][Math.floor(Math.random()*4)];
+        b.style.animationDuration=(5+Math.random()*3)+'s';
+        document.body.appendChild(b);
+        setTimeout(()=>b.remove(),8000);
+    }
+}
+
+function restart(){
+    const msg=document.getElementById('message');
+    msg.classList.remove('show');
+    document.getElementById('flame').style.display='block';
+}
+
+function showGift(){
+    const msg=document.getElementById('message');
+    msg.classList.add('show');
+    document.getElementById('flame').style.display='none';
+
+    createConfetti();
+    createBalloons();
+}
+</script>
+
+</body>
+</html>
