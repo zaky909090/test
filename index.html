@@ -128,12 +128,10 @@ body{
 }
 
 .book{
-    width:850px;
-    max-width:95vw;
-    height:500px;
+    width:min(850px, 95vw);
+    height:clamp(320px, 60vh, 500px);
     position:relative;
 }
-
 .page{
     position:absolute;
     width:50%;
@@ -163,15 +161,15 @@ body{
 
 .page img{
     width:100%;
-    max-height:280px;
+    height:60%;
     object-fit:cover;
     border-radius:12px;
 }
 
 .page p{
     text-align:center;
-    line-height:1.7;
-    font-size:17px;
+    line-height:1.5;
+    font-size:clamp(12px, 2.5vw, 16px);
 }
 
 .cover{
@@ -239,19 +237,19 @@ body{
 
     .book{
         width:95vw;
-        height:350px;
+        height:70vh;
     }
 
     .page{
         padding:10px;
     }
 
-    .page p{
-        font-size:14px;
+    .cover{
+        font-size:16px;
     }
 
-    .cover{
-        font-size:18px;
+    .page h2{
+        font-size:16px;
     }
 }
 </style>
