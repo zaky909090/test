@@ -282,6 +282,36 @@ body{
     color:#ff4081;
     z-index:50;
 }
+.balloon{
+    position:fixed;
+    bottom:-100px;
+    width:50px;
+    height:65px;
+    border-radius:50%;
+    animation:fly 6s linear forwards;
+    z-index:100;
+}
+
+.balloon::after{
+    content:'';
+    position:absolute;
+    width:2px;
+    height:60px;
+    background:#555;
+    left:50%;
+    top:60px;
+}
+
+@keyframes fly{
+    0%{
+        transform:translateY(0);
+        opacity:1;
+    }
+    100%{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
 }
 
     
@@ -357,7 +387,51 @@ function showGift(){
 
 
 function toggleBook(){
-    document.getElementById('book').classList.toggle('open');
+
+    const book = document.getElementById('book');
+    const song = document.getElementById('birthdaySong');
+
+    book.classList.toggle('open');
+
+    if(book.classList.contains('open')){
+        song.play();
+        createBalloons();
+    }else{
+        song.pause();
+        song.currentTime = 0;
+    }
+}
+
+
+function createBalloons(){
+
+    const colors = [
+        '#ff4081',
+        '#2196f3',
+        '#4caf50',
+        '#ff9800',
+        '#9c27b0',
+        '#f44336'
+    ];
+
+    for(let i=0;i<20;i++){
+
+        const balloon = document.createElement('div');
+        balloon.classList.add('balloon');
+
+        balloon.style.left = Math.random()*100 + 'vw';
+        balloon.style.background =
+            colors[Math.floor(Math.random()*colors.length)];
+
+        balloon.style.animationDuration =
+            (4 + Math.random()*4) + 's';
+
+        document.body.appendChild(balloon);
+
+        setTimeout(()=>{
+            balloon.remove();
+        },8000);
+    }
 }
 
 function restart(){
@@ -389,7 +463,15 @@ function restart(){
     small.style.animation='drop 1s forwards 2s';
     candle.style.animation='drop 1s forwards 3s';
 }
+
+const song = document.getElementById('birthdaySong');
+song.pause();
+song.currentTime = 0;
 </script>
+
+<audio id="birthdaySong" loop>
+    <source src="happy-birthday.mp3" type="audio/mpeg">
+</audio>
 
 </body>
 </html>
